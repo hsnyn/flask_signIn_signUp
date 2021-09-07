@@ -1,0 +1,416 @@
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<script defer src="{{url_for('static',filename='theme.js')}}"></script>
+	<script src="{{url_for('static',filename='jquery-3.5.1.min.js')}}"></script>
+	<script src="{{url_for('static',filename='socket.io.min.js')}}"></script>
+	<script src="{{url_for('static',filename='alertify.min.js')}}"></script>
+	<link rel="stylesheet" href="{{url_for('static',filename='css/alertify.min.css')}}"/>
+	<link rel="stylesheet" href="{{url_for('static',filename='css/semantic.min.css')}}"/>
+	<link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}"/>
+	<link rel="stylesheet" href="{{url_for('static',filename='css/login.css')}}"/>
+	<link rel="stylesheet" href="{{url_for('static',filename='css/font.css')}}"/>
+</head>
+
+<body>
+	<script>
+		var socket = io.connect('https://{{server_public_host}}:{{port}}');
+		
+	</script>
+
+	<main>
+		<header>
+			<a id="themeButton" style="cursor:pointer;">
+				<svg class="theme-icon" id="lightIcon" viewBox="0 0 512 512" ><g class="fa-group"><path fill="currentColor" d="M320 32L304 0l-16 32-32 16 32 16 16 32 16-32 32-16zm138.7 149.3L432 128l-26.7 53.3L352 208l53.3 26.7L432 288l26.7-53.3L512 208z" class="fa-secondary" ></path><path fill="currentColor" d="M332.2 426.4c8.1-1.6 13.9 8 8.6 14.5a191.18 191.18 0 0 1-149 71.1C85.8 512 0 426 0 320c0-120 108.7-210.6 227-188.8 8.2 1.6 10.1 12.6 2.8 16.7a150.3 150.3 0 0 0-76.1 130.8c0 94 85.4 165.4 178.5 147.7z" class="fa-primary" ></path></g></svg>
+				<svg class="theme-icon" id="solarIcon" viewBox="0 0 512 512" ><g class="fa-group"><path fill="currentColor" d="M502.42 240.5l-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.41-94.8a17.31 17.31 0 0 0-31 0l-47.3 94.7L92.7 70.8c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4a17.31 17.31 0 0 0 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.41-33.5 47.3 94.7a17.31 17.31 0 0 0 31 0l47.31-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3a17.33 17.33 0 0 0 .2-31.1zm-155.9 106c-49.91 49.9-131.11 49.9-181 0a128.13 128.13 0 0 1 0-181c49.9-49.9 131.1-49.9 181 0a128.13 128.13 0 0 1 0 181z" class="fa-secondary" ></path><path fill="currentColor" d="M352 256a96 96 0 1 1-96-96 96.15 96.15 0 0 1 96 96z" class="fa-primary" ></path></g></svg>
+				<svg class="theme-icon" id="darkIcon" viewBox="0 0 576 512" ><g class="fa-group"><path fill="currentColor" d="M574.09 280.38L528.75 98.66a87.94 87.94 0 0 0-113.19-62.14l-15.25 5.08a16 16 0 0 0-10.12 20.25L395.25 77a16 16 0 0 0 20.22 10.13l13.19-4.39c10.87-3.63 23-3.57 33.15 1.73a39.59 39.59 0 0 1 20.38 25.81l38.47 153.83a276.7 276.7 0 0 0-81.22-12.47c-34.75 0-74 7-114.85 26.75h-73.18c-40.85-19.75-80.07-26.75-114.85-26.75a276.75 276.75 0 0 0-81.22 12.45l38.47-153.8a39.61 39.61 0 0 1 20.38-25.82c10.15-5.29 22.28-5.34 33.15-1.73l13.16 4.39A16 16 0 0 0 180.75 77l5.06-15.19a16 16 0 0 0-10.12-20.21l-15.25-5.08A87.95 87.95 0 0 0 47.25 98.65L1.91 280.38A75.35 75.35 0 0 0 0 295.86v70.25C0 429 51.59 480 115.19 480h37.12c60.28 0 110.38-45.94 114.88-105.37l2.93-38.63h35.76l2.93 38.63c4.5 59.43 54.6 105.37 114.88 105.37h37.12C524.41 480 576 429 576 366.13v-70.25a62.67 62.67 0 0 0-1.91-15.5zM203.38 369.8c-2 25.9-24.41 46.2-51.07 46.2h-37.12C87 416 64 393.63 64 366.11v-37.55a217.35 217.35 0 0 1 72.59-12.9 196.51 196.51 0 0 1 69.91 12.9zM512 366.13c0 27.5-23 49.87-51.19 49.87h-37.12c-26.69 0-49.1-20.3-51.07-46.2l-3.12-41.24a196.55 196.55 0 0 1 69.94-12.9A217.41 217.41 0 0 1 512 328.58z" class="fa-secondary" ></path><path fill="currentColor" d="M64.19 367.9c0-.61-.19-1.18-.19-1.8 0 27.53 23 49.9 51.19 49.9h37.12c26.66 0 49.1-20.3 51.07-46.2l3.12-41.24c-14-5.29-28.31-8.38-42.78-10.42zm404-50l-95.83 47.91.3 4c2 25.9 24.38 46.2 51.07 46.2h37.12C489 416 512 393.63 512 366.13v-37.55a227.76 227.76 0 0 0-43.85-10.66z" class="fa-primary" ></path></g></svg>
+			</a>
+			<span id="Select-English-Language" >English</span>
+			<span id="Select-Korean-Language" >한국어</span>
+		</header>
+		<div class="container" id="container">
+			<div class="form-container sign-up-container" style="background:var(--bg-primary)">
+				<h1 style="margin-top: 10%;" id="Lang-Request-Credentials">Request Credentials</h1>
+                <h1 style="margin-top: 1rem; font-size:1rem; color:red">모든 항목은 필수 입력사항입니다</h1>
+				<input id="First name" style="width: 80%; margin:1rem; " type="text" maxlength="15" placeholder="이름 (최소 3자 | 최대 15자 | 영문만 입력)"></input>
+				<input id="Last name" style="width: 80%; margin:1rem; margin-top:0" type="text" maxlength="15" placeholder="성 (최소 3자 | 최대 15자 | 영문만 입력)"></input>
+
+				<table style="table-layout:fixed; width: 81%; margin-left:auto; margin-right:auto; margin-bottom:1rem; margin-top:0;" >
+					<thead>
+						<th style="display: none; border-radius: 10px 0 0 10px; padding:0.7rem; background: var(--bg-body); color: var(--text-secondary); font-weight:normal; font-size:1rem;" >Gender: </th>
+						<th style="display: none; border-radius: 0 10px 10px 0; padding:0.7rem; background: var(--bg-body); color: var(--text-secondary); font-weight:normal; font-size:1rem;" >
+							<select class="combo-box" style="cursor:pointer; outline: none; background: var(--bg-body); color: var(--text-secondary); font-weight:normal; font-size:1rem;" id="Gender">
+								<option>Male</option>
+								<option>Female</option>
+								<option>Other</option>
+							</select>
+						</th>
+					</thead>
+				</table>
+				
+				<input id="Mobile number" style="width: 80%; margin:1rem; margin-top:0" type="number" oninput="this.value=this.value.slice(0,this.maxLength)" maxlength="11" placeholder="Mobile number (Format: 010XXXXXXXX | '.,-' not allowed)"></input>
+				<input id="Request email" style="width: 80%; margin:1rem; margin-top:0" type="email" maxlength="50" placeholder="Email"></input>
+				<input id="Request password" style="width: 80%; margin:1rem; margin-top:0; margin-bottom:0rem;" type="password" maxlength="12" placeholder="Password (min length: 8 max length:12)"></input>
+				<table style="table-layout:fixed; width: 50%; margin-left:auto; margin-right:3.9rem; margin-bottom:0.5rem; margin-top:0.1;" >
+					<thead>
+						<th style="vertical-align: top;background: var(--bg-primary); color: var(--text-secondary); font-weight:normal; font-size:0.8rem;" id="LANG-Password-Strength">Password strength: </th>
+						<th style="background: var(--bg-primary); color: var(--text-secondary); font-weight:normal; font-size:1rem;" ><progress  style="width: 90%;" max="100" value="0" id="password power"></progress></th>
+					</thead>
+				</table>
+				<input id="Request confirm password" style="width: 80%; margin:1rem; margin-top:0; margin-bottom:0" type="password" placeholder="Confirm Password"></input>
+				<button id="Request Button" style="background: var(--bg-body); margin-top: 2rem;">Request</button>
+			</div>
+			<div class="form-container sign-in-container" style="background:var(--bg-primary)">
+				<h1 style="margin-top: 30%;" id="LANG-login" >Login</h1>
+				<span style="margin-top: 2rem;" id="LANG-login-title" >type your email and password</span>
+				<input id="Login Email" style="width: 80%; margin:1rem;"  type="email" maxlength="50" placeholder="Email"></input>
+				<input id="Login Password" style="width: 80%; margin:1rem; margin-top:0;" type="password" placeholder="Password"></input>
+				<table style="width: 50%;margin-right:3rem; margin-left:auto;">
+					<thead>
+						<th style="padding-right: 0.5rem; color: var(--text-secondary);text-align:right; font-weight:normal; font-size:0.8rem;" id="LANG-Password-Visibility">Password visiblity</th>
+						<th style="text-align:left;"><svg id="Show Password"style="width:1.2rem; cursor:pointer;" aria-hidden="true" focusable="false" data-prefix="fad" data-icon="eye" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="svg-inline--fa fa-eye fa-w-18 fa-3x"><g class="fa-group"><path fill="currentColor" d="M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288.14 400H288a143.93 143.93 0 1 1 .14 0z" class="fa-secondary"></path><path fill="currentColor" d="M380.66 280.87a95.78 95.78 0 1 1-184.87-50.18 47.85 47.85 0 0 0 66.9-66.9 95.3 95.3 0 0 1 118 117.08z" class="fa-primary"></path></g></svg></th>
+						<th style="text-align:left;"><svg id="Hide Password" style="width:1.2rem; cursor:pointer;" aria-hidden="true" focusable="false" data-prefix="fad" data-icon="eye-slash" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="svg-inline--fa fa-eye-slash fa-w-20 fa-3x"><g class="fa-group"><path fill="currentColor" d="M172.12 101.27A311.47 311.47 0 0 1 320 64c122.93 0 230.29 71.59 284.52 177.4a32.35 32.35 0 0 1 0 29.19 332.58 332.58 0 0 1-81 102.25l-72.81-56.27a144 144 0 0 0-222.2-171.73zm239 184.73c.55-1.68 1.07-3.38 1.54-5.11a95 95 0 0 0-118-117.08 47.73 47.73 0 0 1 8.21 38.55zM320 400c-75.85 0-137.25-58.71-142.9-133.11L72.2 185.82c-13.79 17.3-26.48 35.59-36.72 55.59a32.35 32.35 0 0 0 0 29.19C89.71 376.41 197.07 448 320 448c26.91 0 52.87-4 77.89-10.46L346 397.39a143.62 143.62 0 0 1-26 2.61z" class="fa-secondary"></path><path fill="currentColor" d="M636.64 480.55L617 505.82a16 16 0 0 1-22.45 2.8L6.18 53.9a16 16 0 0 1-2.81-22.45L23 6.18a16 16 0 0 1 22.45-2.8L633.82 458.1a16 16 0 0 1 2.82 22.45z" class="fa-primary"></path></g></svg></th>
+					</thead>
+				</table>
+				<h1 style="font-size: 1rem; cursor: pointer; font-weight:normal; color: var(--fa-secondary)" id="forgot credentials">Forgot credentials ?</h1>
+				<button id="Login Button"style="background: var(--bg-body)">Login</button>
+			</div>
+			<div class="overlay-container" style="background:var(--bg-body)">
+				<div class="overlay">
+					<div class="overlay-panel overlay-left">
+						<h1 id="LANG-see-you-soon">See you soon!</h1>
+						<button class="ghost" id="signIn" style="background: var(--bg-primary)">Login</button>
+					</div>
+					<div class="overlay-panel overlay-right">
+						<h1 id="LANG-Hello-Employee">Hello, Employee!</h1>
+						<button class="ghost" id="signUp" style="background: var(--bg-primary)">Request</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="parseThis" style="display:none">
+			<div id="forgotCredentialsForm" style="width: 100%; margin-left:auto; margin-right:auto;">
+				<input id="ForgotLoginEmail" style="border: 0; border-radius: 0; width: 100%; margin:1rem; background: white; color: black"  maxlength="50" type="email" placeholder="이메일"></input>
+				<input id="ForgotMobilenumber" style="border-radius:0; border: 0; border-radius: 0; width: 100%; margin:1rem; margin-top:0; background: white; color: black" type="number" oninput="this.value=this.value.slice(0,this.maxLength)" maxlength="11" placeholder="이동전화번호 (010XXXXXXXX | '.,-' 제외)"></input>
+			</div>
+		</div>
+
+		<script>
+			document.getElementById("Show Password").style.display = 'none';
+			document.getElementById("Hide Password").addEventListener("click", function(){
+				document.getElementById("Hide Password").style.display = 'none';
+				document.getElementById("Show Password").style.display = 'block';
+				document.getElementById("Login Password").type="text";
+				//alertify.error("Password visiblity is enabled");
+				})
+			document.getElementById("Show Password").addEventListener("click", function(){
+				document.getElementById("Show Password").style.display = 'none';
+				document.getElementById("Hide Password").style.display = 'block';
+				document.getElementById("Login Password").type="password";
+				//alertify.error("Password visiblity is disabled");
+				})
+		</script>
+		<script>
+			const signUpButton = document.getElementById('signUp');
+			const signInButton = document.getElementById('signIn');
+			const container = document.getElementById('container');
+			signUpButton.addEventListener('click', () => {container.classList.add("right-panel-active");});
+			signInButton.addEventListener('click', () => {container.classList.remove("right-panel-active");});
+		</script>
+		<script>
+			function validateEmail(email) {
+				const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+				return re.test(String(email).toLowerCase());
+			}
+			function validatePassword(password) {
+				var strength = 0;
+				if (password.match(/[a-z]+/)) {
+					strength += 1;
+					}
+				if (password.match(/[A-Z]+/)) {
+					strength += 1;
+					}
+				if (password.match(/[0-9]+/)) {
+					strength += 1;
+					}
+				if (password.match(/[$@#&!]+/)) {
+					strength += 1;
+					}
+				return strength
+			}
+		</script>
+		<script>
+			document.getElementById("Login Button").addEventListener("click", function(){
+				var email = document.getElementById("Login Email").value;
+				var password = document.getElementById("Login Password").value;
+				if (email.length == 0 && password.length == 0){
+					alertify.error("이메일과 비밀번호를 입력해 주세요");
+					} else {
+						if (email.length == 0){
+							alertify.error("이메일을 입력해 주세요");
+							}
+						if (password.length == 0){
+							if (validateEmail(email) == true){
+									alertify.error("비밀번호를 입력해 주세요");
+								}else {
+									alertify.error("잘못된 이메일입니다");
+								}
+							}
+						}
+				if (email.length != 0 && password.length != 0){
+						if (validateEmail(email) == true){
+							if (password.length < 8 || password.length > 12){
+								alertify.error("잘못된 비밀번호입니다");
+								} else {
+									var passwordStrength = validatePassword(password);
+									if (passwordStrength < 1) {
+										alertify.error("잘못된 비밀번호입니다");
+										} else {
+												$.ajax({
+														type: "POST",
+														url: document.URL,
+														data: {'Type':'Login',
+																'email':email,
+																'password':password
+																},
+														dataType: 'json'
+														}).done(function(data){
+																if (data['Type'] == 'URL'){
+																	location.href = data['message'];
+																		}else{
+																		alertify.error(data['message']);
+																	}
+															})
+											}
+									}
+						}else {
+							alertify.error("잘못된 이메일입니다");
+						}
+					}
+				})
+		</script>
+		<script>
+			function checkLetters(inputtxt)
+				{ 
+					var letters = /^[A-Za-z]+$/;
+					if(inputtxt.match(letters))
+						{
+							return true;
+						}
+					else
+						{	
+							return false;
+						}
+				}
+		</script>
+		<script>
+			document.getElementById("Request Button").addEventListener("click", function(){
+				var firstName = document.getElementById("First name").value;
+				var lastName = document.getElementById("Last name").value;
+				var gender = 'Male';
+				var mobileNumber = document.getElementById("Mobile number").value;
+				var email = document.getElementById("Request email").value;
+				var password = document.getElementById("Request password").value;
+				var confirmPassword = document.getElementById("Request confirm password").value;
+				if (firstName.length == 0 && lastName.length == 0 && mobileNumber.length == 0 && email.length == 0 && password.length == 0 && confirmPassword.length == 0 ){alertify.error("모든 정보를 입력해 주세요");}
+				else if (firstName.length == 0 ){alertify.error("이름을 입력해 주세요");}
+				else if (lastName.length == 0 ){alertify.error("성을 입력해 주세요");}
+				else if (mobileNumber.length == 0 ){alertify.error("전화번호를 입력해 주세요");}
+				else if (mobileNumber.length != 11){alertify.error("잘못된 전화번호입니다");}
+				else if (email.length == 0 ){alertify.error("이메일을 입력해 주세요");}
+				else if (validateEmail(email) != true){alertify.error("잘못된 이메일입니다");}
+				else if (password.length == 0 ){alertify.error("잘못된 비밀번호입니다");}
+				else if (password.length < 8 || password.length > 12){alertify.error("올바른 길이의 비밀번호를 입력해 주세요");}
+				else if (validatePassword(password)<1){alertify.error("위험한 비밀번호입니다");}
+				else if (confirmPassword.length == 0 ){alertify.error("비밀번호를 확인해 주세요");}
+				else if (password != confirmPassword){alertify.error("잘못된 비밀번호입니다");}
+				else if (firstName.length < 3 || firstName.length > 15 || checkLetters(firstName) != true ){alertify.error("잘못된 형식의 이름입니다");}
+				else if (lastName.length < 3 || lastName.length > 15 || checkLetters(lastName) != true ){alertify.error("잘못된 형식의 성입니다");}
+				else if (firstName.length != 0 && lastName.length != 0 && mobileNumber.length != 0 && email.length != 0 && password.length != 0 && confirmPassword.length != 0)
+					{
+						$.ajax({
+								type: "POST",
+								url: document.URL,
+								data: {'Type':'Request',
+									   'FirstName':firstName,
+									   'LastName':lastName,
+									   'gender':gender,
+									   'mobileNumber':mobileNumber,
+									   'email':email,
+									   'password':password,
+									   'confirmPassword':confirmPassword
+									   },
+								dataType: 'json'
+							}).done(function(data){
+										if (data['Type'] == 'Success'){
+												socket.emit('userRequestCountSocket', {type: 'User Requests Count'});
+												alertify.error(data['message']);
+												document.getElementById("signIn").click();
+												document.getElementById("First name").value="";
+												document.getElementById("Last name").value="";
+												document.getElementById("Mobile number").value="";
+												document.getElementById("Request email").value="";
+												document.getElementById("Request password").value="";
+												document.getElementById("Request confirm password").value="";
+												document.getElementById("password power").value=0;
+												}else{
+												alertify.error(data['message']);
+											}
+									})
+					
+					}
+			})
+		</script>
+		<script>
+			var password = document.getElementById("Request password");
+			var ProgessBar = document.getElementById("password power");
+			password.addEventListener("keyup", function(){
+			var power = validatePassword(password.value);
+				switch(power){
+					case 0:
+						ProgessBar.value = 0;
+						break;
+					case 1:
+						ProgessBar.value = 25;
+						break;
+					case 2:
+						ProgessBar.value = 50;
+						break;
+					case 3:
+						ProgessBar.value = 75;
+						break;
+					case 4:
+						ProgessBar.value = 100;
+						break;
+				}
+			})
+		</script>
+		<script>
+			document.getElementById("forgot credentials").addEventListener("click",openForgotForm);
+			function openForgotForm(){
+				var languageCheck = document.getElementById("Select-Korean-Language").style.display;
+				var alpha = document.getElementById("parseThis").innerHTML;
+				document.getElementById("forgotCredentialsForm").remove();
+				window.popup = alertify.confirm(alpha).setting({
+									'title': '비밀번호 찾기',
+									'oncancel': function(){	
+															document.getElementById("parseThis").innerHTML = alpha;
+															},
+									'onok': function(){
+														var email = document.getElementById("ForgotLoginEmail").value;
+														var mobileNumber = document.getElementById("ForgotMobilenumber").value;
+														if (email.length == 0 && mobileNumber.length == 0){
+															if (languageCheck == 'block'){
+																alertify.error('Enter information');
+																}
+															else{
+																alertify.error("모든 정보를 입력해주세요");
+																}
+															}
+														else if (email.length == 0){
+															if (languageCheck == 'block'){
+																alertify.error('Enter email');
+																}
+															else{
+																alertify.error("이메일을 입력해주세요");
+																}
+															}
+														else if (mobileNumber.length == 0){
+															if (languageCheck == 'block'){
+																alertify.error('Enter mobile number');
+																}
+															else{
+																alertify.error("전화번호를 입력해주세요");
+																}
+															}
+														else if (email.length != 0 && mobileNumber.length != 0){
+															if (validateEmail(email) != true){
+																if (languageCheck == 'block'){
+																	alertify.error('Enter valid email');
+																	}
+																else{
+																	alertify.error("이메일 형식이 올바르지 않습니다");
+																	}
+															}
+															else if (mobileNumber.length != 11){
+																if (languageCheck == 'block'){
+																	alertify.error('Enter valid number');
+																	}
+																else{
+																	alertify.error("전화번호 형식이 올바르지 않습니다");
+																	}
+															}
+															else if (validateEmail(email) == true && mobileNumber.length ==11){
+																	$.ajax({
+																		type: "POST",
+																		url: document.URL,
+																		data: {'Type':'Forgot Request',
+																			   'email':email,
+																			   'mobileNumber':mobileNumber
+																			   },
+																		dataType: 'json'
+																	}).done(function(data){
+																			if (data['Type'] == 'Success'){
+																					alertify.error(data['message']);
+																					document.getElementById("ForgotLoginEmail").value="";
+																					document.getElementById("ForgotMobilenumber").value="";
+																					}else{
+																					alertify.error(data['message']);
+																				}
+																		})
+															}
+														}
+														document.getElementById("parseThis").innerHTML = alpha;
+														}
+									});
+			}
+			document.getElementById("forgot credentials").click();
+			window.popup.autoCancel(0);
+			var language = {{loginLanguage|tojson}};
+			document.getElementById("Select-Korean-Language").style="display:block; cursor: pointer; float:right; margin:1rem; font-weight: bold; color: var(--fa-primary); font-size:1.2 rem; vertical-align: middle;";
+			document.getElementById("Select-English-Language").style="display:none;";
+			document.getElementById("Select-English-Language").addEventListener("click", function(){
+				document.getElementById("Select-English-Language").style="display:none";
+				document.getElementById("Select-Korean-Language").style="display:block; cursor: pointer; float:right; margin:1rem; font-weight: bold; color: var(--fa-primary); font-size:1.2 rem; vertical-align: middle;";
+				for (var i=0; i<Object.keys(language).length; i++ ){
+					var OBJECTNAME = Object.keys(language)[i];
+					if (language[OBJECTNAME]['Type'] == 'id'){
+						if (language[OBJECTNAME]['Value'] == 'value'){
+							document.getElementById(OBJECTNAME).innerHTML = language[OBJECTNAME]['English'];
+							}
+						else if (language[OBJECTNAME]['Value'] == 'placeholder'){
+							document.getElementById(OBJECTNAME).placeholder = language[OBJECTNAME]['English'];
+							}
+						
+						}
+					else if (language[OBJECTNAME]['Type'] == 'class'){
+						$(OBJECTNAME).html(language[OBJECTNAME]['English']);
+						}
+				}
+				
+			})
+			document.getElementById("Select-Korean-Language").addEventListener("click", function(){
+				document.getElementById("Select-Korean-Language").style="display:none";
+				document.getElementById("Select-English-Language").style="display:block; cursor: pointer; float:right; margin:1rem; font-weight: bold; color: var(--fa-primary); font-size:1.2 rem; vertical-align: middle;";
+				for (var i=0; i<Object.keys(language).length; i++ ){
+					var OBJECTNAME = Object.keys(language)[i];
+					if (language[OBJECTNAME]['Type'] == 'id'){
+						if (language[OBJECTNAME]['Value'] == 'value'){
+							document.getElementById(OBJECTNAME).innerHTML = language[OBJECTNAME]['Korean'];
+						}
+						else if (language[OBJECTNAME]['Value'] == 'placeholder'){
+							document.getElementById(OBJECTNAME).placeholder = language[OBJECTNAME]['Korean'];
+						}
+					}
+					else if (language[OBJECTNAME]['Type'] == 'class'){
+						$(OBJECTNAME).text(language[OBJECTNAME]['Korean']);
+						}
+				}
+			})
+			
+			document.getElementById("Select-Korean-Language").click();
+			document.getElementById("Select-English-Language").style.display = "none";
+			
+		</script>
+	</main>
+</body>
