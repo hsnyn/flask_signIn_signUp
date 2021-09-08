@@ -14,7 +14,8 @@ class setup_database():
             return False
     
     def make_dir(self):
-        print("Accessing Directory Information")
+        path = r"C:\sqlite"
+        print(path)
     
     def __init__(self):
         super(setup_database, self).__init__()
@@ -23,10 +24,10 @@ class setup_database():
         if self.get_arch() == True:
             if self.architecture == '64bit':
                 print("System Architecture is " +str(self.architecture))
-                
+                self.make_dir()
             elif self.architecture == '32bit':
                 print("System Architecture is " +str(self.architecture))
-                
+                self.make_dir()
             else:
                 print("Error in Architecture Information [function: get_arch] - Change the check parameters for self.architecture variable")
         else:
